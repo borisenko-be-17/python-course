@@ -7,6 +7,17 @@ alarm = 0
 print("Добро пожаловать на ночную смену в музее!")
 print("Цель: найдите пропажу и выйдите через служебный выход.")
 print("Введите help, чтобы узнать список команд.")
+print ("""
+Схема залов музея
+[backdoor] --- [lobby] --- [sculptures]
+                  |
+             [paintings]
+                  |
+               [archeo]
+                  |
+               [storage]
+""")
+
 while True:
     command = input ("\nВведите команду: ").strip().lower()
     if command == "help":
