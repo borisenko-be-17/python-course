@@ -33,6 +33,8 @@ while True:
                 print("В хранилище ничего нет. Пути: archeo.")
         elif room == "backdoor":
             print("Вы у служебного выхода (backdoor). Пути: lobby.")
+
+#go
     elif command.startswith("go "):
         if room == "lobby":
             if command == "go paintings":
@@ -66,8 +68,14 @@ while True:
                         print ("Фонарик выключен, ничего не видно. Включите фонарик.")
                 else:
                     print ("Возьмите фонарик")
+            elif command == "go archeo" or command =="go storage":
+                alarm +=1
+                print ("Из лобби нельзя пойти в эту комнату. Уровень тревоги: ", alarm)
             else:
-                print ("Из лобби нельзя пойти в эту комнату.")
+                alarm+=1
+                print ("Такой комнаты не существует. Уровень тревоги: ", alarm)
+
+    
         elif room == "paintings":
             if command == "go lobby":
                 room = "lobby"
@@ -78,14 +86,26 @@ while True:
                     print("Вы перешли в зал археологии (archeo).")
                 else:
                     print ("Фонарик выключен, ничего не видно. Включите фонарик.")
+            elif command == "go backdoor" or command == "go storage" or command == "go scultures":
+                alarm += 1
+                print ("Из зала живописи нельзя пойти в эту комнату. Уровень тревоги: ", alarm)
             else:
-                print ("Из зала живописи нельзя пойти в эту комнату.")
+                alarm +=1
+                print ("Такой комнаты не существует. Уровень тревоги: ", alarm)
+
+
         elif room == "sculptures":
             if command == "go lobby":
                 room = "lobby"
                 print("Вы вернулись в лобби (lobby).")
+            elif command == "go archeo" or command == "go storage" or command == "go backdoor" or command == "go paintings":
+                alarm += 1
+                print ("Из зала скульптур нельзя пойти в эту комнату. Уровень тревоги: ", alarm)
             else:
-                print ("Из зала скульптур нельзя пойти в эту комнату.")
+                alarm += 1
+                print ("Такой комнаты не существует. Уровень тревоги: ", alarm)
+
+
         elif room == "archeo":
             if command == "go paintings":
                 if flash == True:
@@ -99,8 +119,14 @@ while True:
                     print("Вы вошли в хранилище (storage).")
                 else:
                     print ("Фонарик выключен, ничего не видно. Включите фонарик.")
+            elif command == "go lobby" or command == "go backdoor" or command == "go sculptures":
+                alarm +=1
+                print ("Из зала археологии нельзя пойти в эту комнату. Уровень тревоги: ", alarm)
             else:
-                print ("Из зала археологии нельзя пойти в эту комнату.")
+                alarm += 1
+                print ("Такой комнаты не существует. Уровень тревоги: ", alarm)
+
+
         elif room == "storage":
             if command == "go archeo":
                 if flash == True:
@@ -108,17 +134,27 @@ while True:
                     print("Вы вернулись в зал археологии (archeo).")
                 else:
                     print ("Фонарик выключен, ничего не видно. Включите фонарик.")
+            elif command == "go lobby" or command =="go backdoor" or command == "go sculptures" or command == "go paintings":
+                alarm +=1
+                print ("Из хранилища нельзя пойти в эту комнату. Уровень тревоги: ", alarm)
             else:
-                print ("Из хранилища нельзя пойти в эту комнату.")
-        elif room == "backdoor":
-            if command == "go lobby":
-                room = "lobby"
-                print ("Вы вернулись в лобби.")
-            else:
-                print ("Из служебного выхода нельзя пойти в эту комнату.")
-        else:
-            alarm +=1
-            print ("Такой комнаты не существует. Уровень тревоги: ", alarm)
+                alarm += 1
+                print ("Такой комнаты не существует. Уровень тревоги: ", alarm)
+
+
+        else: 
+            if room == "backdoor":
+                if command == "go lobby":
+                    room = "lobby"
+                    print ("Вы вернулись в лобби.")
+                elif command == "go sculptures" or command == "go paintings" or command == "go storage" or command == "go archeo":
+                    alarm += 1
+                    print ("Из служебного выхода нельзя пойти в эту комнату. Уровень тревогии: ", alarm)
+                else:
+                    alarm += 1
+                    print ("Такой комнаты не существует. Уровень тревоги: ", alarm)
+
+#take
     elif command.startswith("take "):
         if command == "take artifact":
             if room == "storage":
